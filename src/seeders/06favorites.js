@@ -5,11 +5,11 @@ module.exports = {
   up: async (queryInterface, _Sequelize) => queryInterface.bulkInsert('Favorites',
     [
       {
-        title: 'Hamburguer Clássico',
-        category: 'Sanduíche',
-        description: 'Um delicioso hamburguer com queijo, alface e tomate.',
-        image: 'https://example.com/hamburguer-classico.jpg',
-        price: 15.90,
+        title: "Hambúrguer Gourmet",
+        category: "Hambúrgueres",
+        description: "Hambúrguer gourmet com carne suculenta e queijo derretido.",
+        image: "https://example.com/images/hamburguer_gourmet.jpg",
+        price: 19.99,
         userId: 1,
         plateId: 2
       }

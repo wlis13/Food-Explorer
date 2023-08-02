@@ -42,7 +42,7 @@ const FavoriteModel = (Sequelize, DataTypes) => {
         model: 'Plates',
         key: 'id',
       },
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     }
   }, { timestamps: false });
 

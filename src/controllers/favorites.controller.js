@@ -29,7 +29,7 @@ async function createController(req, res) {
       category,
       description,
       price,
-      id: plateId,
+      plateId,
       userId,
     });
 
@@ -38,8 +38,8 @@ async function createController(req, res) {
     });
     res.status(200).json(getCreate);
   } catch (error) {
-    console.log
-    res.status(500).json({ error: "Internal server error" });
+    console.log(error)
+    res.status(500).json({ message: `Internal server error: ${error}` });
   }
 }
 
