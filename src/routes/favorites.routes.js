@@ -4,7 +4,7 @@ const { createController, removeController, indexController } = require("../cont
 const favoritesRoutes = Router();
 
 
-favoritesRoutes.post("/create/:id", createController);
+favoritesRoutes.post("/create-favorite", createController);
 favoritesRoutes.delete("/:id/:user_id", removeController);
 favoritesRoutes.get("/index/:userId", indexController);
 

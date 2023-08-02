@@ -12,7 +12,7 @@ module.exports = {
         price: 29.99,
         ingredients: "chocolate, farinha, ovos, açúcar, manteiga",
         favorited: 0,
-        userId: 1
+        userId: null
       },
       {
         title: "Pizza Margherita",
@@ -22,7 +22,7 @@ module.exports = {
         price: 24.99,
         ingredients: "massa de pizza, molho de tomate, queijo mozzarella, manjericão",
         favorited: 0,
-        userId: 2
+        userId: 1
       },
       {
         title: "Salada Caesar",
@@ -32,7 +32,7 @@ module.exports = {
         price: 14.99,
         ingredients: "alface, croutons, queijo parmesão, molho Caesar",
         favorited: 0,
-        userId: 3
+        userId: null
       },
       {
         title: "Sushi Variado",
@@ -42,7 +42,7 @@ module.exports = {
         price: 39.99,
         ingredients: "peixe fresco, arroz, alga marinha, gergelim",
         favorited: 0,
-        userId: 4
+        userId: null
       },
       {
         title: "Hambúrguer Gourmet",
@@ -52,7 +52,7 @@ module.exports = {
         price: 19.99,
         ingredients: "pão de hambúrguer, carne, queijo cheddar, cebola caramelizada",
         favorited: 0,
-        userId: 5
+        userId: null
       },
     ], {}),
 

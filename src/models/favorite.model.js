@@ -28,6 +28,7 @@ const FavoriteModel = (Sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'Users',
         key: 'id',
@@ -36,6 +37,7 @@ const FavoriteModel = (Sequelize, DataTypes) => {
     },
     plateId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'Plates',
         key: 'id',
@@ -46,6 +48,7 @@ const FavoriteModel = (Sequelize, DataTypes) => {
 
   Favorite.associate = (models) => {
     Favorite.belongsTo(models.Plate, { foreignKey: 'plateId' })
+    Favorite.belongsTo(models.User, { foreignKey: 'userId' })
   }
   return Favorite;
 };

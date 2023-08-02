@@ -49,6 +49,11 @@ const RequestModel = (Sequelize, DataTypes) => {
       onDelete: 'CASCADE',
     }
   }, { timestamps: false });
+
+  Request.associate = (models) => {
+    Request.belongsTo(models.User, { foreingKey: 'userId' })
+    Request.belongsTo(models.Plate, { foreingKey: 'plateId' })
+  }
   return Request;
 };
 

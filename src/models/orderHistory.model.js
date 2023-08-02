@@ -28,6 +28,10 @@ const OrderHistoryModel = (Sequelize, DataTypes) => {
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   });
+
+  OrderHistory.associate = (models) => {
+    OrderHistory.belongsTo(models.User, { foreingKey: 'userId' })
+  }
   return OrderHistory;
 };
 

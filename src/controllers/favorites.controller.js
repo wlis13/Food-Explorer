@@ -1,8 +1,8 @@
 const { Favorite, Plate } = require("../models");
 
-async function createController(_req, res) {
+async function createController(req, res) {
   try {
-    const { title, category, description, price, image, userId, plateId } = request.body;
+    const { title, category, description, price, image, userId, plateId } = req.body;
 
     const checkExist = await Favorite.findOne({
       where: { userId, id: plateId },
@@ -22,25 +22,24 @@ async function createController(_req, res) {
       await Plate.update({ favorited: currentValue - 1 }, {
         where: { id: plateId },
       });
-    } else {
-      await Favorite.create({
-        title,
-        image,
-        category,
-        description,
-        price,
-        id: plateId,
-        userId,
-      });
-
-      await Plate.update({ favorited: currentValue + 1 }, {
-        where: { id: plateId },
-      });
     }
-    res.status(200).json();
+    const getCreate = await Favorite.create({
+      title,
+      image,
+      category,
+      description,
+      price,
+      id: plateId,
+      userId,
+    });
+
+    await Plate.update({ favorited: currentValue + 1 }, {
+      where: { id: plateId },
+    });
+    res.status(200).json(getCreate);
   } catch (error) {
     console.log
-    response.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 
@@ -76,10 +75,10 @@ async function indexController(req, res) {
   }
 }
 
-async function removeController(request, response) {
+async function removeController(req, res) {
   try {
-    const id = request.params.id;
-    const user_id = request.params.user_id;
+    const id = req.params.id;
+    const user_id = req.params.user_id;
 
     await Favorite.destroy({
       where: { user_id, id },
@@ -95,10 +94,10 @@ async function removeController(request, response) {
       where: { id },
     });
 
-    response.json();
+    res.status(204).json({ message: "favorito foi excluído com sucesso!" });
   } catch (error) {
     console.error(error);
-    response.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 

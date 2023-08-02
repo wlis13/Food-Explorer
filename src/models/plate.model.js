@@ -14,7 +14,6 @@ const PlateModel = (Sequelize, DataTypes) => {
     favorited: { type: DataTypes.INTEGER, allowNull: false, default: 0 },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'Users',
         key: 'id'
@@ -23,6 +22,9 @@ const PlateModel = (Sequelize, DataTypes) => {
     }
   }, { timestamps: false });
 
+  Plate.associate = (models) => {
+    Plate.belongsTo(models.User, { foreingKey: 'userId' })
+  }
   return Plate;
 };
 

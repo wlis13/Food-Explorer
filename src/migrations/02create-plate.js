@@ -19,7 +19,6 @@ module.exports = {
       favorited: { type: Sequelize.INTEGER, allowNull: false, default: 0 },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: 'Users',
           key: 'id'

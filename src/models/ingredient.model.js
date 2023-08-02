@@ -29,6 +29,11 @@ const IngredientModel = (Sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     }
   }, { timestamps: false });
+
+  Ingredient.associate = (models) => {
+    Ingredient.belongsTo(models.User, { foreingKey: 'userId' })
+    Ingredient.belongsTo(models.Plate, { foreingKey: 'plateId' })
+  }
   return Ingredient;
 };
 
