@@ -78,10 +78,12 @@ async function indexController(req, res) {
 async function removeController(req, res) {
   try {
     const id = req.params.id;
-    const user_id = req.params.user_id;
+    console.log(id)
+    const userId = req.params.userId;
+    console.log(userId)
 
     await Favorite.destroy({
-      where: { user_id, id },
+      where: { userId, id },
     });
 
     const plate = await Plate.findOne({
@@ -97,7 +99,7 @@ async function removeController(req, res) {
     res.status(204).json({ message: "favorito foi excluído com sucesso!" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: `Internal server error: ${error}` });
   }
 }
 
