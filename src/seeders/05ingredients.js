@@ -7,7 +7,7 @@ module.exports = {
       {
         name: 'Tomate',
         userId: 1,
-        plateId: 1,
+        plateId: 5,
       },
       {
         name: 'Queijo',
@@ -22,7 +22,7 @@ module.exports = {
       {
         name: 'Frango',
         userId: 4,
-        plateId: 2,
+        plateId: 4,
       },
       {
         name: 'Cebola',
