@@ -1,5 +1,5 @@
 const {
-  getAllIngredientsByName, getIngredientById,
+  getAllIngredientsByName, getIngredientById, DeleteIngredientById, createSeveralIngredients,
 } = require("../services/ingredients.service");
 
 async function searchPlateIdByIngredient(req, res) {
@@ -22,7 +22,36 @@ async function getIngredientByPlateId(req, res) {
   }
 };
 
+async function updateIngredientsController(req, res) {
+  try {
+    const userId = req.getUser.id;
+    const plateId = req.params.id;
+    const { ingredients } = req.body;
+    await DeleteIngredientById(plateId);
+
+    const insertIngredient = ingredients.map((ingredient) => {
+      return {
+        ingredient,
+        plateId,
+        userId
+      }
+    });
+
+    if (insertIngredient.length > 0) {
+      await createSeveralIngredients(insertIngredient);
+      res.status(201).json({ message: "Ingredientes atualizados com sucesso!" });
+      return;
+    } else {
+      res.status(401).json({ message: "Não foram encontrados valores na requisiçaõ." });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({ message: `Erro no servidor: ${error}` });
+  }
+}
+
 module.exports = {
   searchPlateIdByIngredient,
   getIngredientByPlateId,
+  updateIngredientsController,
 };

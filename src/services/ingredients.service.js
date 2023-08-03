@@ -16,9 +16,24 @@ async function getIngredientById(id) {
     where: { plantId: id }
   });
   return getIngredient;
+};
+
+async function DeleteIngredientById(id) {
+  await Ingredient.destroy({ where: { plateId: id } });
+}
+
+async function createIngredient(NewIngredient) {
+  await Ingredient.create(NewIngredient);
+}
+
+async function createSeveralIngredients(NewIngredients) {
+  await Ingredient.bulkCreate(NewIngredients);
 }
 
 module.exports = {
   getAllIngredientsByName,
   getIngredientById,
+  DeleteIngredientById,
+  createIngredient,
+  createSeveralIngredients,
 };
