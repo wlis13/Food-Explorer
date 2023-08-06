@@ -1,9 +1,14 @@
-const { createOrderHistoryService, getOrderByUserIdAndStatus, getAllOrderHistoryService } = require("../services/orderHistory.service");
+const {
+  createOrderHistoryService,
+  getOrderByUserIdAndStatus,
+  getAllOrderHistoryService,
+  updateOrderHistoryService,
+} = require("../services/orderHistory.service");
 const { getRequestByUserIdService } = require("../services/request.service");
 
 async function getOrderHistoryByUserIdController(req, res) {
   try {
-    const userId = req.params;
+    const userId = req.params.id;
     const getRequest = await getRequestByUserIdService(userId);
     let newOrderHistoryDetails = [];
 
@@ -46,8 +51,19 @@ async function showOrderHistoryController(_req, res) {
   }
 };
 
+async function updateOrderHistoryController(req, res) {
+  try {
+    const { id, status } = req.body;
+    const getUpdate = await updateOrderHistoryService(id, status);
+    res.status(201).json(getUpdate);
+  } catch (error) {
+    res.status(500).json({ message: `Erro no servidor: ${error}` })
+  }
+};
+
 module.exports = {
   getOrderHistoryByUserIdController,
   indexOrderHistoryController,
   showOrderHistoryController,
+  updateOrderHistoryController,
 };

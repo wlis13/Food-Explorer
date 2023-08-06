@@ -23,8 +23,8 @@ async function createOrderHistoryService(newOrder) {
   return getCreateOrder;
 };
 
-async function updateOrderHistoryService(id, upDateOrder) {
-  const getUpdate = await OrderHistory.updateOne({ where: { _id: id } }, { $set: { upDateOrder } });
+async function updateOrderHistoryService(id, status) {
+  const getUpdate = await OrderHistory.update({ status }, { where: { id: id } });
   return getUpdate;
 };
 
