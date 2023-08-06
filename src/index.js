@@ -2,6 +2,7 @@ const express = require('express');
 const userRouter = require('./routes/user.routes');
 const favoritesRoutes = require('./routes/favorites.routes');
 const ingredientRouter = require('./routes/ingredients.routes');
+const orderHistoryRouter = require('./routes/orderHistory.routes');
 require('dotenv').config();
 
 const port = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/", userRouter);
 app.use("/", favoritesRoutes);
 app.use("/", ingredientRouter);
+app.use("/", orderHistoryRouter);
 
 app.listen(port, () => console.log(`Servidor rodando na porta: ${port}`));
 
