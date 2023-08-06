@@ -1,5 +1,10 @@
 const { OrderHistory } = "../models";
 
+async function getAllOrderHistoryService() {
+  const getOrder = await OrderHistory.findAll({ order: [['status', 'ASC']] });
+  return getOrder;
+}
+
 async function getOrderHistoryByUserIdService(id) {
   const getOrder = await OrderHistory.findAll({ where: { userId: id } });
   return getOrder;
@@ -24,6 +29,7 @@ async function updateOrderHistoryService(id, upDateOrder) {
 };
 
 module.exports = {
+  getAllOrderHistoryService,
   getOrderHistoryByUserIdService,
   getOrderByUserIdAndStatus,
   createOrderHistoryService,
