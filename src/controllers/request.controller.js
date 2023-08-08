@@ -1,6 +1,6 @@
 const { Request, Plate } = require("../models");
 
-async function createRequest(req, res) {
+async function createRequestController(req, res) {
   const { title, description, price, category, amount, plateId, userId } = req.body;
 
   const [checkIfExist] = await Request.findAll({
@@ -27,7 +27,7 @@ async function createRequest(req, res) {
   }
 }
 
-async function showRequests(req, res) {
+async function showRequestsController(req, res) {
   const userId = req.params.id;
   const requests = await Request.findAll({
     where: { userId },
@@ -36,7 +36,7 @@ async function showRequests(req, res) {
   return res.status(200).json(requests);
 }
 
-async function deleteRequest(req, res) {
+async function deleteRequestController(req, res) {
   const { userId, plateId } = req.params;
 
   const deleteOptions = { where: { userId } };
@@ -51,7 +51,7 @@ async function deleteRequest(req, res) {
 }
 
 module.exports = {
-  createRequest,
-  showRequests,
-  deleteRequest,
+  createRequestController,
+  showRequestsController,
+  deleteRequestController,
 };
