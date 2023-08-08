@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
-const uploadConfig = require("../configs/upload");
+const uploadConfig = require("../upload/upload");
 
 async function saveFile(file) {
   const sourcePath = path.resolve(uploadConfig.TMP_FOLDER_PLATE, file);

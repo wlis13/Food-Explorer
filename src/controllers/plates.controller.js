@@ -1,15 +1,12 @@
 const { Op } = require('sequelize');
-const DiskStorageForPlate = require('../providers/DiskStorageForPlate');
-const Plate = require('../models/Plate');
-const Ingredient = require('../models/Ingredient');
-const Favorite = require('../models/Favorite');
+const { Plate, Ingredient, Favorite } = require("../models");
 const { saveFile, deleteFile } = require('../Providers/diskStorageForPlate');
 
-async function createPlate(request, response) {
-  const data = request.body.data;
+async function createPlate(req, res) {
+  const data = req.body.data;
   const { title, description, category, ingredients, price } = JSON.parse(data);
-  const user_id = request.user.id;
-  const imagem = request.file.filename;
+  const user_id = req.user.id;
+  const imagem = req.file.filename;
 
   const filename = await saveFile(imagem);
 
@@ -32,23 +29,23 @@ async function createPlate(request, response) {
 
   await Ingredient.bulkCreate(ingredientsInsert);
 
-  return response.status(200).json();
+  return res.status(200).json();
 }
 
-async function showPlate(request, response) {
-  const { id } = request.params;
+async function showPlate(req, res) {
+  const { id } = req.params;
 
   const plate = await Plate.findByPk(id);
   const ingredients = await Ingredient.findAll({ where: { plate_id: id }, order: [['name']] });
 
-  return response.json({
+  return res.json({
     plate,
     ingredients,
   });
 }
 
-async function deletePlate(request, response) {
-  const { id } = request.params;
+async function deletePlate(req, res) {
+  const { id } = req.params;
 
   const plate = await Plate.findByPk(id);
 
@@ -59,11 +56,11 @@ async function deletePlate(request, response) {
   await plate.destroy();
   await Favorite.destroy({ where: { id } });
 
-  return response.json();
+  return res.json();
 }
 
-async function indexPlates(request, response) {
-  const { title } = request.query;
+async function indexPlates(req, res) {
+  const { title } = req.query;
 
   let plates;
 
@@ -89,12 +86,12 @@ async function indexPlates(request, response) {
     plates = await Plate.findAll({ order: [['favorited']] });
   }
 
-  return response.json(plates.reverse());
+  return res.json(plates.reverse());
 }
 
-async function updatePlate(request, response) {
-  const plate_id = request.params.id;
-  const { title, description, category, price, ingredients } = request.body;
+async function updatePlate(req, res) {
+  const plate_id = req.params.id;
+  const { title, description, category, price, ingredients } = req.body;
 
   const plate = await Plate.findByPk(plate_id);
 
@@ -125,7 +122,7 @@ async function updatePlate(request, response) {
 
   await plate.save();
 
-  return response.status(200).json();
+  return res.status(200).json();
 }
 
 module.exports = {
